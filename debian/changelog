@@ -1,0 +1,64 @@
+cd-discid (0.9-1) unstable; urgency=low
+
+  * Updates for MacOS X on G5-based systems to properly calculate
+    discid by Evan Jones <ejones@uwaterloo.ca>
+  * Solaris compile error fix by David Schweikert <dws@ee.ethz.ch>
+
+ -- Robert Woodcock <rcw@debian.org>  Mon, 15 Dec 2003 16:00:26 -0800
+
+cd-discid (0.8-1) unstable; urgency=low
+
+  * MacOS X support, thanks to Evan Jones <ejones@uwaterloo.ca>
+  * Remembered to include the Makefile in the tarball this time
+
+ -- Robert Woodcock <rcw@debian.org>  Sun,  5 Jan 2003 18:16:50 -0800
+
+cd-discid (0.7-1) unstable; urgency=low
+
+  * NetBSD support, thanks to Chris Gilbert <chris@NetBSD.org>
+
+ -- Robert Woodcock <rcw@debian.org>  Sat, 28 Jul 2001 17:48:52 -0700
+
+cd-discid (0.6-1) unstable; urgency=low
+
+  * OpenBSD support, thanks to Marcus Daniel <danielm@uni-muenster.de>
+
+ -- Robert Woodcock <rcw@debian.org>  Thu,  8 Feb 2001 21:33:23 -0800
+
+cd-discid (0.5-1) unstable; urgency=low
+
+  * FreeBSD support, thanks to Niels Bakker
+
+ -- Robert Woodcock <rcw@debian.org>  Wed, 18 Oct 2000 20:21:05 -0700
+
+cd-discid (0.4-1) unstable; urgency=low
+
+  * Now opens cdrom device with O_RDONLY | O_NONBLOCK for better
+    compatibility, thanks to Tommy U. Schonfeld
+  * Removed the last references to cdgrab
+  * Prints device name on failure (this can be handy for abcde users
+    who aren't aware of the default device)
+
+ -- Robert Woodcock <rcw@debian.org>  Sun, 14 May 2000 10:34:50 -0700
+
+cd-discid (0.3-1) unstable; urgency=low
+
+  * Now compiles on Solaris, thanks to David Champion
+
+ -- Robert Woodcock <rcw@debian.org>  Sat, 18 Mar 2000 03:20:13 -0800
+
+cd-discid (0.2-2) unstable; urgency=low
+
+  * FHS compliance.
+
+ -- Robert Woodcock <rcw@debian.org>  Mon, 11 Oct 1999 22:35:25 -0700
+
+cd-discid (0.2-1) unstable; urgency=low
+
+  * Split off from the cdgrab package.
+
+ -- Robert Woodcock <rcw@debian.org>  Fri,  7 May 1999 20:18:36 -0700
+
+Local variables:
+mode: debian-changelog
+End:

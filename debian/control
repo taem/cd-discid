@@ -1,0 +1,14 @@
+Source: cd-discid
+Section: sound
+Priority: optional
+Maintainer: Robert Woodcock <rcw@debian.org>
+Standards-Version: 3.6.1
+Build-Depends: debhelper
+
+Package: cd-discid
+Architecture: any
+Depends: ${shlibs:Depends}
+Conflicts: cdgrab (<< 0.7)
+Description: CDDB DiscID utility
+ cd-discid is a backend utility to get CDDB discid information from a CD-ROM
+ disc.
