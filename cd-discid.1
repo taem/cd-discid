@@ -1,0 +1,25 @@
+.TH CD-DISCID 1
+.\" NAME should be all caps, SECTION should be 1-8, maybe w/ subsection
+.\" other parms are allowed: see man(7), man(1)
+.SH NAME
+cd-discid \- read CD and get CDDB discid information.
+.SH SYNOPSIS
+.B cd-discid
+.I <devicename>
+.SH "DESCRIPTION"
+In order to do CDDB queries over the Internet, you must know the DiscID of
+the CD you are querying.
+.BR cd-discid
+provides you with that information. It outputs the discid, the number of
+tracks, the frame offset of all of the tracks, and the total length of the
+CD in seconds, on one line in a space-delimited format.
+.BR cd-discid
+was designed as a backend tool for cdgrab (now
+.BR abcde )
+but will work independantly of it.
+.SH OPTIONS
+.TP
+.B devicename
+CD\-ROM block device name that contains a CD to be queried.
+.SH AUTHOR
+Robert Woodcock <rcw@debian.org>

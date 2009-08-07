@@ -1,0 +1,55 @@
+cd-discid 0.9
+
+  * Updates for MacOS X on G5-based systems to properly calculate
+    discid by Evan Jones <ejones@uwaterloo.ca>
+  * Solaris compile error fix by David Schweikert <dws@ee.ethz.ch>
+
+ -- Robert Woodcock <rcw@debian.org>  Mon, 15 Dec 2003
+
+cd-discid 0.8
+
+  * MacOS X support, thanks to Evan Jones <ejones@uwaterloo.ca>
+  * Remembered to include the Makefile in the tarball this time
+
+ -- Robert Woodcock <rcw@debian.org>  Sun,  5 Jan 2003
+
+cd-discid 0.7
+
+  * NetBSD support, thanks to Chris Gilbert <chris@NetBSD.org>
+
+ -- Robert Woodcock <rcw@debian.org>  Sat, 28 Jul 2001
+
+cd-discid 0.6
+
+* OpenBSD support, thanks to Marcus Daniel <danielm@uni-muenster.de>
+
+ -- Robert Woodcock <rcw@debian.org>  Thu,  8 Feb 2001
+
+cd-discid 0.5
+
+* FreeBSD support, thanks to Niels Bakker
+
+ -- Robert Woodcock <rcw@debian.org>  Wed, 18 Oct 2000
+
+cd-discid 0.4
+
+* Now opens cdrom device with O_RDONLY | O_NONBLOCK, thanks to
+  Tommy U. Schonfeld
+* Removed the last references to cdgrab
+* Prints device name on failure (this can be handy for abcde users
+  who aren't aware of the default device)
+
+ -- Robert Woodcock <rcw@debian.org>  Sun, 14 May 2000
+
+cd-discid 0.3
+
+* Now compiles on Solaris, thanks to David Champion
+
+ -- Robert Woodcock <rcw@debian.org>  Sat, 18 Mar 2000
+
+cd-discid 0.2
+
+* No longer uses libcdaudio
+* Split off of cdgrab
+
+ -- Robert Woodcock <rcw@debian.org>  Fri,  7 May 1999

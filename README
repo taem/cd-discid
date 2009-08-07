@@ -1,0 +1,38 @@
+CD-DISCID
+=========
+cd-discid is a backend utility to get CDDB discid information from a CD-ROM
+disc. It was originally designed for cdgrab (now abcde), but can be used for
+any purpose requiring CDDB data.
+
+Using cd-discid is very simple. It accepts one command line parameter, the
+device name of the CD-ROM drive to look up. For example:
+
+$ cd-discid /dev/cdrom
+7c0b8b0b 11 150 23115 42165 60015 79512 101560 118757 136605 159492 176067 198875 2957
+
+The information returned is, in order:
+
+* 32-bit hex CDDB disc-id. The first byte of this is the track checksum, the
+  next two are the length of the CD in seconds, and the last is the number
+  of tracks
+* Number of tracks
+* Frame offset of each track
+* Second offset for the leadout track (length of the CD in seconds)
+
+The (lack of) inspiration behind this output format was the CDDB database
+server. It accepts requests like so:
+
+http://freedb.freedb.org/~cddb/cddb.cgi?cmd=cddb+query+7c0b8b0b+11+150+23115+
+42165+60015+79512+101560+118757+136605+159492+176067+198875+2957&hello=user+
+hostname+program+version&proto=3
+
+cd-discid was developed with attention to the CDDB specifications, available
+at http://www.freedb.org/sections.php?name=Sections?sop=viewarticle&artid=28,
+using portions of their sample code.
+
+TODO: output ID3v2 MCDI (Music CD Identifier) frames. Since these are binary in
+nature it is unclear what the best method of outputting these should be. If
+someone knows of software that can read conforming MCDI frames, please let
+me know.
+--
+Robert Woodcock <rcw@debian.org>
