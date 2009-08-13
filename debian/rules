@@ -11,7 +11,6 @@ build: build-stamp
 build-stamp:
 	dh_testdir
 
-	
 	# Add here commands to compile the package.
 	$(MAKE) 
 
@@ -23,7 +22,7 @@ clean:
 	rm -f build-stamp install-stamp
 
 	# Add here commands to clean up after the build process.
-	-$(MAKE) clean
+	$(MAKE) clean
 
 	dh_clean
 
@@ -54,7 +53,7 @@ binary-arch: build install
 #	dh_installemacsen
 #	dh_installinit
 	dh_installcron
-	dh_installmanpages
+	dh_installman
 #	dh_undocumented
 	dh_installchangelogs changelog
 	dh_link
