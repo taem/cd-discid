@@ -1,13 +1,15 @@
 #!/usr/bin/make -f
 #-*- makefile -*-
 
+include /usr/share/dpatch/dpatch.make
+
 build: build-stamp
-build-stamp:
+build-stamp: patch
 	dh_testdir
 	$(MAKE) 
 	touch build-stamp
 
-clean:
+clean: unpatch
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp install-stamp
