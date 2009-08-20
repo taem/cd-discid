@@ -27,7 +27,7 @@
 
 #include <linux/cdrom.h>
 #define		cdte_track_address	cdte_addr.lba
-
+#define		DEVICE_NAME		"/dev/cdrom"
 #elif defined(sun) && defined(unix) && defined(__SVR4)
 
 #include <sys/cdio.h>
@@ -36,6 +36,7 @@
 /* According to David Schweikert <dws@ee.ethz.ch>, cd-discid needs this
  * to compile on Solaris */
 #define cdte_track_address cdte_addr.lba
+#define DEVICE_NAME	"/dev/vol/aliases/cdrom0"
 
 #elif defined(__FreeBSD__)
 
@@ -53,6 +54,7 @@
 #define        cdte_track      track
 #define        cdte_format     address_format
 #define        cdte_track_address	entry.addr.lba
+#define        DEVICE_NAME     "/dev/cdrom"
 
 #elif defined(__OpenBSD__) || defined(__NetBSD__)
 
@@ -68,6 +70,7 @@
 #define        cdrom_tocentry  cd_toc_entry
 #define        cdte_track      track
 #define        cdte_track_address       addr.lba
+#define        DEVICE_NAME     "/dev/cd0a"
 
 #elif defined(__APPLE__)
 
@@ -85,6 +88,7 @@
 #define        cdth_trk1       lastTrackNumberInLastSessionLSB
 #define        cdrom_tocentry  CDTrackInfo
 #define	       cdte_track_address trackStartAddress
+#define        DEVICE_NAME     "/dev/disk1"
 
 #else
 # error "Your OS isn't supported yet."
@@ -109,6 +113,7 @@ int main(int argc, char *argv[])
 	int drive, i, totaltime;
 	long int cksum=0;
 	unsigned char first=1, last=1;
+	char *devicename=DEVICE_NAME;
 	struct cdrom_tochdr hdr;
 	struct cdrom_tocentry *TocEntry;
 #if defined(__OpenBSD__) || defined(__NetBSD__)
@@ -117,14 +122,16 @@ int main(int argc, char *argv[])
 	dk_cd_read_disc_info_t discInfoParams;
 #endif
 
-	if (argc < 2) {
-		fprintf(stderr, "Usage: %s <devicename>\n", argv[0]);
+	if (argc == 2) {
+		devicename = argv[1];
+	} else if (argc > 2) {
+		fprintf(stderr, "Usage: %s [devicename]\n", argv[0]);
 		exit(1);
 	}
 
-	drive = open(argv[1], O_RDONLY | O_NONBLOCK);
+	drive = open(devicename, O_RDONLY | O_NONBLOCK);
 	if (drive < 0) {
-		fprintf(stderr, "cd-discid: %s: ", argv[1]);
+		fprintf(stderr, "cd-discid: %s: ", devicename);
 		perror("open");
 		exit(1);
 	}
