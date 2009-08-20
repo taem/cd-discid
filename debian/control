@@ -3,7 +3,7 @@ Section: sound
 Priority: optional
 Maintainer: Timur Birsh <taem@linukz.org>
 Build-Depends: debhelper (>= 7), dpatch
-Standards-Version: 3.8.2
+Standards-Version: 3.8.3
 
 Package: cd-discid
 Architecture: any

@@ -6,7 +6,7 @@ include /usr/share/dpatch/dpatch.make
 build: build-stamp
 build-stamp: patch
 	dh_testdir
-	$(MAKE) 
+	$(MAKE)
 	touch build-stamp
 
 clean: unpatch
@@ -21,7 +21,6 @@ install-stamp: build-stamp
 	dh_testdir
 	dh_testroot
 	dh_clean -k
-	dh_installdirs
 	$(MAKE) install DESTDIR=`pwd`/debian/cd-discid
 	touch install-stamp
 

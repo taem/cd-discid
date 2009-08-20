@@ -1,24 +1,26 @@
 cd-discid (0.9-2) unstable; urgency=low
 
   * debian/control:
-    - Bump Standards-Version to 3.8.2 (no changes needed).
+    - Bump Standards-Version to 3.8.3 (no changes needed).
     - Add version to the debhelper dependency.
     - Add dpatch build dependency.
   * debian/rules:
     - Fix lintian error 'debian-rules-ignores-make-clean-error'.
     - Use dh_installman instead of dh_installmanpages.
     - Fix DESTDIR variable in 'install-stamp' target.
+    - Remove dh_installdirs invocation.
     - Use dpatch.
     - General cleanup.
   * debian/changelog:
     - Update FSF address.
   * debian/compat:
     - Add compatibility level 5.
+  * Remove debian/dirs.
   * debian/patches/01_nostrip.dpatch:
     - Do not strip symbols. Closes: #436615.
   * New maintainer. Closes: #527477 (ITA).
 
- -- Timur Birsh <taem@linukz.org>  Wed, 12 Aug 2009 14:21:39 +0600
+ -- Timur Birsh <taem@linukz.org>  Mon, 17 Aug 2009 20:05:49 +0600
 
 cd-discid (0.9-1) unstable; urgency=low
 
