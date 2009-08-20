@@ -1,3 +1,19 @@
+cd-discid (1.0-1) unstable; urgency=low
+
+  * New upstream release. Thanks to Colin Tuckley.
+  * Use default CD-ROM device name if no parameter given on the
+    command line. Closes: #303989.
+  * debian/patches/01_nostrip.dpatch: remove, merged upstream.
+  * debian/control:
+    - Remove dpatch builddep.
+    - New Homepage.
+  * debian/rules:
+    - Since there are no any dpatches in package, remove its
+      references.
+  * Add me to debian/copyright.
+
+ -- Timur Birsh <taem@linukz.org>  Thu, 20 Aug 2009 15:10:24 +0600
+
 cd-discid (0.9-2) unstable; urgency=low
 
   * debian/control:
