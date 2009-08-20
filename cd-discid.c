@@ -131,7 +131,7 @@ int main(int argc, char *argv[])
 
 	drive = open(devicename, O_RDONLY | O_NONBLOCK);
 	if (drive < 0) {
-		fprintf(stderr, "cd-discid: %s: ", devicename);
+		fprintf(stderr, "%s: %s: ", argv[0], devicename);
 		perror("open");
 		exit(1);
 	}
@@ -142,13 +142,13 @@ int main(int argc, char *argv[])
 	discInfoParams.bufferLength = sizeof(hdr);
 	if (ioctl(drive, DKIOCCDREADDISCINFO, &discInfoParams) < 0
 		|| discInfoParams.bufferLength != sizeof(hdr)) {
-		fprintf(stderr, "cd-discid: %s: ", argv[1]);
+		fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
 		perror("DKIOCCDREADDISCINFO");
 		exit(1);
 	}
 #else
 	if (ioctl(drive, CDROMREADTOCHDR, &hdr) < 0) {
-		fprintf(stderr, "cd-discid: %s: ", argv[1]);
+		fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
 		perror("CDROMREADTOCHDR");
 		exit(1);
 	}
@@ -162,8 +162,8 @@ int main(int argc, char *argv[])
 	TocEntry = malloc(len);
 	if (!TocEntry) {
 		fprintf(stderr,
-			"cd-discid: %s: Can't allocate memory for TOC entries\n",
-			argv[1]);
+			"%s: %s: Can't allocate memory for TOC entries\n",
+			argv[0], argv[1]);
 		exit(1);
 	}
 #if defined(__OpenBSD__) 
@@ -178,7 +178,7 @@ int main(int argc, char *argv[])
 	memset(TocEntry, 0, len);
 	
 	if (ioctl(drive, CDIOREADTOCENTRYS, (char *) &t) < 0) {
-		fprintf(stderr, "cd-discid: %s: ", argv[1]);
+		fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
 		perror("CDIOREADTOCENTRYS");
 	}
 #elif defined(__APPLE__)
@@ -192,7 +192,7 @@ int main(int argc, char *argv[])
 		trackInfoParams.buffer = &TocEntry[i];
 
 		if (ioctl(drive, DKIOCCDREADTRACKINFO, &trackInfoParams) < 0) {
-			fprintf(stderr, "cd-discid: %s: ", argv[1]);
+			fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
 			perror("DKIOCCDREADTRACKINFO");
 		}
 	}
@@ -208,7 +208,7 @@ int main(int argc, char *argv[])
 		TocEntry[i].cdte_track = i + 1;
 		TocEntry[i].cdte_format = CDROM_LBA;
 		if (ioctl(drive, CDROMREADTOCENTRY, &TocEntry[i]) < 0) {
-			fprintf(stderr, "cd-discid: %s: ", argv[1]);
+			fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
 			perror("CDROMREADTOCENTRY");
 		}
 	}
@@ -216,7 +216,7 @@ int main(int argc, char *argv[])
 	TocEntry[last].cdte_track = CDROM_LEADOUT;
 	TocEntry[last].cdte_format = CDROM_LBA;
 	if (ioctl(drive, CDROMREADTOCENTRY, &TocEntry[i]) < 0) {
-		fprintf(stderr, "cd-discid: %s: ", argv[1]);
+		fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
 		perror("CDROMREADTOCENTRY");
 	}
 #endif
