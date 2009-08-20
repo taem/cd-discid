@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Timur Birsh <taem@linukz.org>
 Build-Depends: debhelper (>= 7)
 Standards-Version: 3.8.3
+Homepage: http://gitorious.org/cd-discid
 
 Package: cd-discid
 Architecture: any
