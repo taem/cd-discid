@@ -1,3 +1,16 @@
+cd-discid 1.0
+
+  * Colin Tuckley suggested me took over maintenance of cd-discid.
+    New project homepage is http://gitorious.org/cd-discid.
+    Following changes have been introduced in this release.
+  * Use default CD-ROM device name if no parameter given on the
+    command line.
+  * Be consistent - use argv[0] everywhere for program name.
+  * Makefile: do not strip symbols from binaries.
+  * Update FSF address in license text.
+
+ -- Timur Birsh <taem@linukz.org>  2009-08-20
+
 cd-discid 0.9
 
   * Updates for MacOS X on G5-based systems to properly calculate

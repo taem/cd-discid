@@ -32,7 +32,7 @@ clean:
 
 install: cd-discid
 	$(INSTALL) -d -m 755 $(bindir)
-	$(INSTALL) -s -m 755 -o 0 cd-discid $(bindir)
+	$(INSTALL) -m 755 -o 0 cd-discid $(bindir)
 	$(INSTALL) -d -m 755 $(mandir)
 	$(INSTALL) -m 644 -o 0 cd-discid.1 $(mandir)
 
