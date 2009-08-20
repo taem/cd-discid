@@ -5,7 +5,7 @@
 cd-discid \- read CD and get CDDB discid information.
 .SH SYNOPSIS
 .B cd-discid
-.I <devicename>
+.I [devicename]
 .SH "DESCRIPTION"
 In order to do CDDB queries over the Internet, you must know the DiscID of
 the CD you are querying.
@@ -20,6 +20,16 @@ but will work independantly of it.
 .SH OPTIONS
 .TP
 .B devicename
-CD\-ROM block device name that contains a CD to be queried.
+CD\-ROM block device name that contains a CD to be queried. If option
+omitted, following device name assumed:
+.RS
+.IP \fI/dev/cdrom\fP
+for Linux and FreeBSD
+.IP \fI/dev/cd0a\fP
+for OpenBSD and NetBSD
+.IP \fI/dev/vol/aliases/cdrom0\fP
+for Solaris
+.IP \fI/dev/disk1\fP
+for MacOS X
 .SH AUTHOR
-Robert Woodcock <rcw@debian.org>
+Robert Woodcock <rcw@debian.org>. Updates by Timur Bish <taem@linukz.org>
