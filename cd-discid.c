@@ -1,11 +1,12 @@
 /*
  * Copyright (c) 1999-2003 Robert Woodcock <rcw@debian.org>
+ * Copyright (c) 2009 Timur Birsh <taem@linukz.org>
  * This code is hereby licensed for public consumption under either the
  * GNU GPL v2 or greater, or Larry Wall's Artistic license - your choice.
 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
 #include <stdio.h>
@@ -27,7 +28,7 @@
 
 #include <linux/cdrom.h>
 #define		cdte_track_address	cdte_addr.lba
-
+#define		DEVICE_NAME		"/dev/cdrom"
 #elif defined(sun) && defined(unix) && defined(__SVR4)
 
 #include <sys/cdio.h>
@@ -36,6 +37,7 @@
 /* According to David Schweikert <dws@ee.ethz.ch>, cd-discid needs this
  * to compile on Solaris */
 #define cdte_track_address cdte_addr.lba
+#define DEVICE_NAME	"/dev/vol/aliases/cdrom0"
 
 #elif defined(__FreeBSD__)
 
@@ -53,6 +55,7 @@
 #define        cdte_track      track
 #define        cdte_format     address_format
 #define        cdte_track_address	entry.addr.lba
+#define        DEVICE_NAME     "/dev/cdrom"
 
 #elif defined(__OpenBSD__) || defined(__NetBSD__)
 
@@ -68,6 +71,7 @@
 #define        cdrom_tocentry  cd_toc_entry
 #define        cdte_track      track
 #define        cdte_track_address       addr.lba
+#define        DEVICE_NAME     "/dev/cd0a"
 
 #elif defined(__APPLE__)
 
@@ -85,6 +89,7 @@
 #define        cdth_trk1       lastTrackNumberInLastSessionLSB
 #define        cdrom_tocentry  CDTrackInfo
 #define	       cdte_track_address trackStartAddress
+#define        DEVICE_NAME     "/dev/disk1"
 
 #else
 # error "Your OS isn't supported yet."
@@ -109,6 +114,7 @@ int main(int argc, char *argv[])
 	int drive, i, totaltime;
 	long int cksum=0;
 	unsigned char first=1, last=1;
+	char *devicename=DEVICE_NAME;
 	struct cdrom_tochdr hdr;
 	struct cdrom_tocentry *TocEntry;
 #if defined(__OpenBSD__) || defined(__NetBSD__)
@@ -117,14 +123,16 @@ int main(int argc, char *argv[])
 	dk_cd_read_disc_info_t discInfoParams;
 #endif
 
-	if (argc < 2) {
-		fprintf(stderr, "Usage: %s <devicename>\n", argv[0]);
+	if (argc == 2) {
+		devicename = argv[1];
+	} else if (argc > 2) {
+		fprintf(stderr, "Usage: %s [devicename]\n", argv[0]);
 		exit(1);
 	}
 
-	drive = open(argv[1], O_RDONLY | O_NONBLOCK);
+	drive = open(devicename, O_RDONLY | O_NONBLOCK);
 	if (drive < 0) {
-		fprintf(stderr, "cd-discid: %s: ", argv[1]);
+		fprintf(stderr, "%s: %s: ", argv[0], devicename);
 		perror("open");
 		exit(1);
 	}
@@ -135,13 +143,13 @@ int main(int argc, char *argv[])
 	discInfoParams.bufferLength = sizeof(hdr);
 	if (ioctl(drive, DKIOCCDREADDISCINFO, &discInfoParams) < 0
 		|| discInfoParams.bufferLength != sizeof(hdr)) {
-		fprintf(stderr, "cd-discid: %s: ", argv[1]);
+		fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
 		perror("DKIOCCDREADDISCINFO");
 		exit(1);
 	}
 #else
 	if (ioctl(drive, CDROMREADTOCHDR, &hdr) < 0) {
-		fprintf(stderr, "cd-discid: %s: ", argv[1]);
+		fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
 		perror("CDROMREADTOCHDR");
 		exit(1);
 	}
@@ -155,8 +163,8 @@ int main(int argc, char *argv[])
 	TocEntry = malloc(len);
 	if (!TocEntry) {
 		fprintf(stderr,
-			"cd-discid: %s: Can't allocate memory for TOC entries\n",
-			argv[1]);
+			"%s: %s: Can't allocate memory for TOC entries\n",
+			argv[0], argv[1]);
 		exit(1);
 	}
 #if defined(__OpenBSD__) 
@@ -171,7 +179,7 @@ int main(int argc, char *argv[])
 	memset(TocEntry, 0, len);
 	
 	if (ioctl(drive, CDIOREADTOCENTRYS, (char *) &t) < 0) {
-		fprintf(stderr, "cd-discid: %s: ", argv[1]);
+		fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
 		perror("CDIOREADTOCENTRYS");
 	}
 #elif defined(__APPLE__)
@@ -185,7 +193,7 @@ int main(int argc, char *argv[])
 		trackInfoParams.buffer = &TocEntry[i];
 
 		if (ioctl(drive, DKIOCCDREADTRACKINFO, &trackInfoParams) < 0) {
-			fprintf(stderr, "cd-discid: %s: ", argv[1]);
+			fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
 			perror("DKIOCCDREADTRACKINFO");
 		}
 	}
@@ -201,7 +209,7 @@ int main(int argc, char *argv[])
 		TocEntry[i].cdte_track = i + 1;
 		TocEntry[i].cdte_format = CDROM_LBA;
 		if (ioctl(drive, CDROMREADTOCENTRY, &TocEntry[i]) < 0) {
-			fprintf(stderr, "cd-discid: %s: ", argv[1]);
+			fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
 			perror("CDROMREADTOCENTRY");
 		}
 	}
@@ -209,7 +217,7 @@ int main(int argc, char *argv[])
 	TocEntry[last].cdte_track = CDROM_LEADOUT;
 	TocEntry[last].cdte_format = CDROM_LBA;
 	if (ioctl(drive, CDROMREADTOCENTRY, &TocEntry[i]) < 0) {
-		fprintf(stderr, "cd-discid: %s: ", argv[1]);
+		fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
 		perror("CDROMREADTOCENTRY");
 	}
 #endif
