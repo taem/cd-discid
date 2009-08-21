@@ -1,10 +1,13 @@
 Author: Robert Woodcock <rcw@debian.org>
-Download location: http://linukz.org/cd-discid.shtml.
+Download location: http://linukz.org/cd-discid.shtml
+
+The current Debian maintainer is Timur Birsh <taem@linukz.org>
 
 Copyright:
 
 Copyright (c) 1998-2003 Robert Woodcock <rcw@debian.org>
 Copyright (c) 2009 Timur Birsh <taem@linukz.org>
+
 This code is hereby licensed for public consumption under either the
 GNU GPL v2 or greater, or Larry Wall's Artistic license - your choice.
 
@@ -16,3 +19,6 @@ On Debian systems, the complete text of the GNU General Public
 License, version 2, can be found in /usr/share/common-licenses/GPL-2.
 The complete text of the Artistic License can be found in
 /usr/share/common-licenses/Artistic.
+
+The Debian packaging is (c) 2009, Timur Birsh <taem@linukz.org> and
+is licensed under the GPL v2 or greater, see above.
