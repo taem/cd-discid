@@ -7,10 +7,14 @@ cd-discid (1.0-1) unstable; urgency=low
   * debian/control:
     - Remove dpatch builddep.
     - New Homepage.
+    - Add Vcs-Git and Vcs-Browser fields.
   * debian/rules:
     - Since there are no any dpatches in package, remove its
       references.
-  * Add me to debian/copyright.
+  * debian/copyright:
+    - Update download location.
+    - Update copyright statements.
+    - Add Debian packaging copyright.
 
  -- Timur Birsh <taem@linukz.org>  Thu, 20 Aug 2009 15:10:24 +0600
 
