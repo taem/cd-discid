@@ -1,13 +1,14 @@
 cd-discid 1.0
 
-  * Colin Tuckley suggested me took over maintenance of cd-discid.
-    New project homepage is http://gitorious.org/cd-discid.
-    Following changes have been introduced in this release.
-  * Use default CD-ROM device name if no parameter given on the
-    command line.
-  * Be consistent - use argv[0] everywhere for program name.
-  * Makefile: do not strip symbols from binaries.
-  * Update FSF address in license text.
+  * New maintainer.
+  * New project homepage is http://linukz.org/cd-discid.shtml.
+  * Following changes have been introduced in this release:
+    - Use default CD-ROM device name if no parameter given on the
+      command line.
+    - Be consistent - use argv[0] everywhere for program name and
+      devicename for device name.
+    - Makefile: do not strip symbols from binaries.
+    - Update FSF address in license text.
 
  -- Timur Birsh <taem@linukz.org>  2009-08-20
 
