@@ -143,13 +143,13 @@ int main(int argc, char *argv[])
 	discInfoParams.bufferLength = sizeof(hdr);
 	if (ioctl(drive, DKIOCCDREADDISCINFO, &discInfoParams) < 0
 		|| discInfoParams.bufferLength != sizeof(hdr)) {
-		fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
+		fprintf(stderr, "%s: %s: ", argv[0], devicename);
 		perror("DKIOCCDREADDISCINFO");
 		exit(1);
 	}
 #else
 	if (ioctl(drive, CDROMREADTOCHDR, &hdr) < 0) {
-		fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
+		fprintf(stderr, "%s: %s: ", argv[0], devicename);
 		perror("CDROMREADTOCHDR");
 		exit(1);
 	}
@@ -164,7 +164,7 @@ int main(int argc, char *argv[])
 	if (!TocEntry) {
 		fprintf(stderr,
 			"%s: %s: Can't allocate memory for TOC entries\n",
-			argv[0], argv[1]);
+			argv[0], devicename);
 		exit(1);
 	}
 #if defined(__OpenBSD__) 
@@ -179,7 +179,7 @@ int main(int argc, char *argv[])
 	memset(TocEntry, 0, len);
 	
 	if (ioctl(drive, CDIOREADTOCENTRYS, (char *) &t) < 0) {
-		fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
+		fprintf(stderr, "%s: %s: ", argv[0], devicename);
 		perror("CDIOREADTOCENTRYS");
 	}
 #elif defined(__APPLE__)
@@ -193,7 +193,7 @@ int main(int argc, char *argv[])
 		trackInfoParams.buffer = &TocEntry[i];
 
 		if (ioctl(drive, DKIOCCDREADTRACKINFO, &trackInfoParams) < 0) {
-			fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
+			fprintf(stderr, "%s: %s: ", argv[0], devicename);
 			perror("DKIOCCDREADTRACKINFO");
 		}
 	}
@@ -209,7 +209,7 @@ int main(int argc, char *argv[])
 		TocEntry[i].cdte_track = i + 1;
 		TocEntry[i].cdte_format = CDROM_LBA;
 		if (ioctl(drive, CDROMREADTOCENTRY, &TocEntry[i]) < 0) {
-			fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
+			fprintf(stderr, "%s: %s: ", argv[0], devicename);
 			perror("CDROMREADTOCENTRY");
 		}
 	}
@@ -217,7 +217,7 @@ int main(int argc, char *argv[])
 	TocEntry[last].cdte_track = CDROM_LEADOUT;
 	TocEntry[last].cdte_format = CDROM_LBA;
 	if (ioctl(drive, CDROMREADTOCENTRY, &TocEntry[i]) < 0) {
-		fprintf(stderr, "%s: %s: ", argv[0], argv[1]);
+		fprintf(stderr, "%s: %s: ", argv[0], devicename);
 		perror("CDROMREADTOCENTRY");
 	}
 #endif
