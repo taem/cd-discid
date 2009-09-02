@@ -1,3 +1,12 @@
+cd-discid (1.1-1) unstable; urgency=low
+
+  * New upstream release:
+    - Fix FTBFS on Debian GNU/kFreeBSD.
+  * debian/control: point Vcs-Browser to 'deb' branch.
+  * Add debian/watch.
+
+ -- Timur Birsh <taem@linukz.org>  Wed, 02 Sep 2009 14:06:11 +0600
+
 cd-discid (1.0-1) unstable; urgency=low
 
   * New upstream release. Thanks to Colin Tuckley.
