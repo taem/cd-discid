@@ -32,9 +32,9 @@ clean:
 
 install: cd-discid
 	$(INSTALL) -d -m 755 $(bindir)
-	$(INSTALL) -m 755 -o 0 cd-discid $(bindir)
+	$(INSTALL) -m 755 cd-discid $(bindir)
 	$(INSTALL) -d -m 755 $(mandir)
-	$(INSTALL) -m 644 -o 0 cd-discid.1 $(mandir)
+	$(INSTALL) -m 644 cd-discid.1 $(mandir)
 
 tarball:
 	@cd .. && tar czvf cd-discid_$(VERSION).orig.tar.gz \

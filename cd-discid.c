@@ -39,7 +39,10 @@
 #define cdte_track_address cdte_addr.lba
 #define DEVICE_NAME	"/dev/vol/aliases/cdrom0"
 
-#elif defined(__FreeBSD__)
+/* __FreeBSD_kernel__ is needed for properly compiling on Debian GNU/kFreeBSD
+ Look at http://glibc-bsd.alioth.debian.org/porting/PORTING for more info */
+
+#elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
 
 #include <sys/cdio.h>
 #define        CDROM_LBA       CD_LBA_FORMAT   /* first frame is 0 */

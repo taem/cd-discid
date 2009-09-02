@@ -1,3 +1,12 @@
+cd-discid 1.1
+
+  * Fix FTBFS on Debian GNU/kFreeBSD.
+  * Apply patches by Ville Skyttä <ville.skytta@iki.fi>:
+    - cd-discid.1: fix spelling errors.
+    - Makefile: install files as non root.
+
+ -- Timur Birsh <taem@linukz.org>  2009-09-02
+
 cd-discid 1.0
 
   * New maintainer.
