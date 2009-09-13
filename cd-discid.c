@@ -254,6 +254,7 @@ int main(int argc, char *argv[])
         printf(" %d\n", (TocEntry[last].cdte_track_address + CD_MSF_OFFSET) / CD_FRAMES);
 
         free(TocEntry);
+	close(drive);
 
         return 0;
 }
