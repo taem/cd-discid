@@ -10,7 +10,7 @@ Vcs-Browser: https://github.com/taem/cd-discid/tree/deb
 
 Package: cd-discid
 Architecture: any
-Depends: ${shlibs:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: CDDB DiscID utility
  cd-discid is a backend utility to get CDDB discid information from a CD-ROM
  disc.
