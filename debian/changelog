@@ -1,3 +1,20 @@
+cd-discid (1.2-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/control:
+    - bump standards version to 3.9.2 (no changes needed)
+    - point Vcs-* fields to github.com
+    - add ${misc:Depends} to binary dependencies
+    - bump debhelper version to 7.0.50~
+  * debian/compat: bump debhelper's compatibility level to 7.
+  * Bump package source format to 3.0 (quilt).
+  * debian/copyright: follow DEP5.
+  * debian/rules,
+    debian/install,
+    debian/manpages: use debhelper's override mechanism.
+
+ -- Timur Birsh <taem@linukz.org>  Thu, 28 Apr 2011 15:27:27 +0600
+
 cd-discid (1.1-1) unstable; urgency=low
 
   * New upstream release:
