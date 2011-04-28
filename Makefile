@@ -1,4 +1,4 @@
-VERSION = 0.8
+VERSION = 1.2
 CC = gcc
 CFLAGS = -g -O2
 LDFLAGS =
