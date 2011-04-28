@@ -5,6 +5,7 @@
 cd-discid \- read CD and get CDDB discid information.
 .SH SYNOPSIS
 .B cd-discid
+[--musicbrainz]
 .I [devicename]
 .SH "DESCRIPTION"
 In order to do CDDB queries over the Internet, you must know the DiscID of
@@ -18,6 +19,9 @@ was designed as a backend tool for cdgrab (now
 .BR abcde )
 but will work independently of it.
 .SH OPTIONS
+.TP
+.B --musicbrainz
+Output a TOC that is suitable for calculating the MusicBrainz disc id.
 .TP
 .B devicename
 CD\-ROM block device name that contains the CD to be queried. If this option
