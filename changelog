@@ -1,3 +1,12 @@
+cd-discid 1.2
+
+  * Add --musicbrainz option: output a TOC that is suitable for
+    calculating the MusicBrainz disc id.
+    Patch by Lars Magne Ingebrigtsen <larsi@gnus.org>.
+  * Fix memory leak.
+
+ -- Timur Birsh <taem@linukz.org>  2011-04-28
+
 cd-discid 1.1
 
   * Fix FTBFS on Debian GNU/kFreeBSD.

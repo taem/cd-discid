@@ -4,7 +4,7 @@ cd-discid is a backend utility to get CDDB discid information from a CD-ROM
 disc. It was originally designed for cdgrab (now abcde), but can be used for
 any purpose requiring CDDB data.
 
-Using cd-discid is very simple. It accepts one command line parameter, the
+Using cd-discid is very simple. It accepts a command line parameter, the
 device name of the CD-ROM drive to look up. For example:
 
 $ cd-discid /dev/cdrom
@@ -25,6 +25,9 @@ server. It accepts requests like so:
 http://freedb.freedb.org/~cddb/cddb.cgi?cmd=cddb+query+7c0b8b0b+11+150+23115+
 42165+60015+79512+101560+118757+136605+159492+176067+198875+2957&hello=user+
 hostname+program+version&proto=3
+
+By Lars Magne Ingebrigtsen added --musicbrainz option which outputs a TOC
+that is suitable for calculating the MusicBrainz disc id.
 
 cd-discid was developed with attention to the CDDB specifications, available
 at http://www.freedb.org/sections.php?name=Sections?sop=viewarticle&artid=28,
