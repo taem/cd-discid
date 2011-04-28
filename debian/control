@@ -5,8 +5,8 @@ Maintainer: Timur Birsh <taem@linukz.org>
 Build-Depends: debhelper (>= 7)
 Standards-Version: 3.9.2
 Homepage: http://linukz.org/cd-discid.shtml
-Vcs-Git: git://gitorious.org/cd-discid/mainline.git
-Vcs-Browser: http://gitorious.org/cd-discid/mainline/trees/deb
+Vcs-Git: git://github.com/taem/cd-discid.git
+Vcs-Browser: https://github.com/taem/cd-discid/tree/deb
 
 Package: cd-discid
 Architecture: any
