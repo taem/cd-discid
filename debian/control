@@ -12,5 +12,9 @@ Package: cd-discid
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: CDDB DiscID utility
- cd-discid is a backend utility to get CDDB discid information from a CD-ROM
- disc.
+ In order to do CDDB queries over the Internet, you must know the DiscID of
+ the CD you are querying. cd-discid provides you with that information. It
+ outputs the discid, the number of tracks, the frame offset of all of the
+ tracks, and the total length of the CD in seconds, on one line in
+ a space-delimited format. cd-discid was designed as a backend tool for
+ cdgrab (now abcde) but will work independently of it.
