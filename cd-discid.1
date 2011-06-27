@@ -1,13 +1,13 @@
-.TH CD-DISCID 1
+.TH CD\-DISCID 1 2011-06-27
 .\" NAME should be all caps, SECTION should be 1-8, maybe w/ subsection
 .\" other parms are allowed: see man(7), man(1)
 .SH NAME
-cd-discid \- read CD and get CDDB discid information.
+cd\-discid \- read CD and get CDDB discid information
 .SH SYNOPSIS
-.B cd-discid
-[--musicbrainz]
-.I [devicename]
-.SH "DESCRIPTION"
+.B cd\-discid
+.RB [ --musicbrainz ]
+.RI [ devicename ]
+.SH DESCRIPTION
 In order to do CDDB queries over the Internet, you must know the DiscID of
 the CD you are querying.
 .BR cd-discid
@@ -28,12 +28,12 @@ CD\-ROM block device name that contains the CD to be queried. If this option
 is omitted, the following device name is assumed:
 .RS
 .IP \fI/dev/cdrom\fP
-for Linux and FreeBSD
+Linux and FreeBSD
 .IP \fI/dev/cd0a\fP
-for OpenBSD and NetBSD
+OpenBSD and NetBSD
 .IP \fI/dev/vol/aliases/cdrom0\fP
-for Solaris
+Solaris
 .IP \fI/dev/disk1\fP
-for MacOS X
+MacOS X
 .SH AUTHOR
-Robert Woodcock <rcw@debian.org>. Updates by Timur Bish <taem@linukz.org>
+Robert Woodcock <rcw@debian.org>. Updates by Timur Bish <taem@linukz.org>.
