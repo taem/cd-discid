@@ -1,6 +1,7 @@
 *~
 *.o
 /cd-discid
+*.orig
 debian/cd-discid.debhelper.log
 debian/cd-discid.substvars
 debian/cd-discid/
