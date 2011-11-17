@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 1999-2003 Robert Woodcock <rcw@debian.org>
- * Copyright (c) 2009 Timur Birsh <taem@linukz.org>
+ * Copyright (c) 2009-2011 Timur Birsh <taem@linukz.org>
  * This code is hereby licensed for public consumption under either the
  * GNU GPL v2 or greater, or Larry Wall's Artistic license - your choice.
 
@@ -32,6 +32,8 @@
 #define		DEVICE_NAME		"/dev/cdrom"
 #elif defined(__GNU__)
 
+/* According to Samuel Thibault <sthibault@debian.org>, cd-discid needs this
+ * to compile on Debian GNU/Hurd (i386) */
 #include <sys/cdrom.h>
 #define		cdte_track_address	cdte_addr.lba
 #define		DEVICE_NAME		"/dev/cd0"
