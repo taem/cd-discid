@@ -30,6 +30,11 @@
 #include <linux/cdrom.h>
 #define		cdte_track_address	cdte_addr.lba
 #define		DEVICE_NAME		"/dev/cdrom"
+#elif defined(__GNU__)
+
+#include <sys/cdrom.h>
+#define		cdte_track_address	cdte_addr.lba
+#define		DEVICE_NAME		"/dev/cd0"
 #elif defined(sun) && defined(unix) && defined(__SVR4)
 
 #include <sys/cdio.h>
