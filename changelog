@@ -1,3 +1,11 @@
+cd-discid 1.3
+
+  * Fix FTBS on Debian GNU/Hurd (i386). Patch by Samuel Thibault.
+    Debian bug #647971.
+  * Polish man page.
+
+ -- Timur Birsh <taem@linukz.org>  2011-11-17
+
 cd-discid 1.2
 
   * Add --musicbrainz option: output a TOC that is suitable for
