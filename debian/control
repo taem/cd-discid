@@ -3,7 +3,7 @@ Section: sound
 Priority: optional
 Maintainer: Timur Birsh <taem@linukz.org>
 Build-Depends: debhelper (>= 7.0.50~)
-Standards-Version: 3.9.2
+Standards-Version: 3.9.3.1
 Homepage: http://linukz.org/cd-discid.shtml
 Vcs-Git: git://github.com/taem/cd-discid.git
 Vcs-Browser: https://github.com/taem/cd-discid/tree/deb
