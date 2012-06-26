@@ -1,6 +1,7 @@
 CC ?= cc
 RM = rm -f
 INSTALL = /usr/bin/install
+STRIP = strip
 
 CFLAGS ?= -g -O2
 CPPFLAGS ?=
@@ -26,7 +27,8 @@ cd-discid: $(OBJS)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@ $(OBJS)
 
 install: cd-discid
-	$(INSTALL) -D -s cd-discid $(BINDIR)/cd-discid
+	$(INSTALL) -D cd-discid $(BINDIR)/cd-discid
+	$(STRIP) $(BINDIR)/cd-discid
 	$(INSTALL) -D -m 644 cd-discid.1 $(MANDIR)/cd-discid.1
 
 clean:
