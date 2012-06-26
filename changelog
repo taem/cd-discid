@@ -1,3 +1,9 @@
+cd-discid 1.3.1
+
+  * Cleanup Makefile.
+
+ -- Timur Birsh <taem@linukz.org>  2012-06-26
+
 cd-discid 1.3
 
   * Fix FTBS on Debian GNU/Hurd (i386). Patch by Samuel Thibault.
