@@ -27,9 +27,9 @@ cd-discid: $(OBJS)
 	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@ $(OBJS)
 
 install: cd-discid
-	$(INSTALL) -D cd-discid $(BINDIR)/cd-discid
-	$(STRIP) $(BINDIR)/cd-discid
-	$(INSTALL) -D -m 644 cd-discid.1 $(MANDIR)/cd-discid.1
+	$(INSTALL) -D cd-discid $(DESTDIR)$(BINDIR)/cd-discid
+	$(STRIP) $(DESTDIR)$(BINDIR)/cd-discid
+	$(INSTALL) -D -m 644 cd-discid.1 $(DESTDIR)$(MANDIR)/cd-discid.1
 
 clean:
 	$(RM) $(OBJS) cd-discid
