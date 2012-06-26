@@ -1,41 +1,33 @@
-VERSION = 1.3
-CC = gcc
-CFLAGS = -g -O2
-LDFLAGS =
-LIBS = 
-DEFS =  
-INSTALL = /usr/bin/install -c
+CC ?= cc
+RM = rm -f
+INSTALL = /usr/bin/install
 
-# Installation directories
-prefix = ${DESTDIR}/usr
-exec_prefix = ${prefix}
-mandir = ${prefix}/share/man/man1
-bindir = ${exec_prefix}/bin
-etcdir = ${DESTDIR}/etc
+CFLAGS ?= -g -O2
+CPPFLAGS ?=
+LDFLAGS ?=
 
-INCL = 
 SRCS = cd-discid.c
 OBJS = $(SRCS:.c=.o)
+
+PREFIX ?= /usr/local
+BINDIR = ${PREFIX}/bin
+MANDIR = ${PREFIX}/share/man/man1
 
 .SUFFIXES: .c .o
 
 .c.o:
-	$(CC) $(DEFS) $(CFLAGS) -c $<
+	@printf "  CC      $@\n"
+	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
 
 all: cd-discid
 
 cd-discid: $(OBJS)
-	$(CC) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)
-
-clean:
-	rm -f *~ *.o core cd-discid
+	@printf "  LINK    $@\n"
+	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@ $(OBJS)
 
 install: cd-discid
-	$(INSTALL) -d -m 755 $(bindir)
-	$(INSTALL) -m 755 cd-discid $(bindir)
-	$(INSTALL) -d -m 755 $(mandir)
-	$(INSTALL) -m 644 cd-discid.1 $(mandir)
+	$(INSTALL) -D -s cd-discid $(BINDIR)/cd-discid
+	$(INSTALL) -D -m 644 cd-discid.1 $(MANDIR)/cd-discid.1
 
-tarball:
-	@cd .. && tar czvf cd-discid_$(VERSION).orig.tar.gz \
-		cd-discid-$(VERSION)/{COPYING,README,Makefile,cd-discid.1,cd-discid.c,changelog}
+clean:
+	$(RM) $(OBJS) cd-discid
