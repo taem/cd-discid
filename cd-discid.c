@@ -238,6 +238,9 @@ int main(int argc, char *argv[])
 	}
 #endif
 
+	/* release file handle */
+	close(drive);
+
 #if defined(__FreeBSD__)
 	TocEntry[i].cdte_track_address = ntohl(TocEntry[i].cdte_track_address);
 #endif
@@ -270,7 +273,6 @@ int main(int argc, char *argv[])
 		printf(" %d\n", (TocEntry[last].cdte_track_address + CD_MSF_OFFSET) / CD_FRAMES);
 
 	free(TocEntry);
-	close(drive);
 
 	return 0;
 }
