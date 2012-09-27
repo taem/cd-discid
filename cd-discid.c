@@ -146,6 +146,10 @@ int main(int argc, char *argv[])
 		usage();
 		exit(EXIT_SUCCESS);
 	}
+	if (argc == 2 && !strcmp(argv[1], "--version")) {
+		fprintf(stderr, "cd-discid %s.\n", VERSION);
+		exit(EXIT_SUCCESS);
+	}
 	if (argc >= 2 && !strcmp(argv[1], "--musicbrainz")) {
 		musicbrainz = 1;
 		argc--;

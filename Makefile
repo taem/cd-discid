@@ -1,9 +1,12 @@
+VERSION = 1.4
+
 CC ?= cc
 RM = rm -f
 INSTALL = /usr/bin/install
 STRIP = strip
 
 CFLAGS ?= -g -O2
+CFLAGS := -DVERSION=\"$(VERSION)\" $(CFLAGS)
 CPPFLAGS ?=
 LDFLAGS ?=
 
