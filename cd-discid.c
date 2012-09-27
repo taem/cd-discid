@@ -112,6 +112,18 @@ int cddb_sum(int n)
 	return ret;
 }
 
+void usage()
+{
+	fprintf(stderr, "Usage: cd-discid [<option> ...]\n\n");
+	fprintf(stderr, "Options:\n");
+	fprintf(stderr, "  --musicbrainz   Output a TOC that is suitable "
+		"for calculating the MusicBrainz disc id.\n");
+	fprintf(stderr, "  --help          Show this message.\n");
+	fprintf(stderr, "  --version       Show the version.\n");
+	fprintf(stderr, "  devicename      CD-ROM block device name that "
+		"contains the CD to be queried.\n");
+}
+
 int main(int argc, char *argv[])
 {
 	int len;
@@ -130,6 +142,10 @@ int main(int argc, char *argv[])
 	dk_cd_read_disc_info_t discInfoParams;
 #endif
 
+	if (argc == 2 && !strcmp(argv[1], "--help")) {
+		usage();
+		exit(EXIT_SUCCESS);
+	}
 	if (argc >= 2 && !strcmp(argv[1], "--musicbrainz")) {
 		musicbrainz = 1;
 		argc--;
@@ -138,8 +154,7 @@ int main(int argc, char *argv[])
 	if (argc == 2)
 		devicename = argv[1];
 	else if (argc > 2) {
-		fprintf(stderr, "Usage: %s [--musicbrainz] [devicename]\n",
-			command);
+		usage();
 		exit(EXIT_FAILURE);
 	}
 
