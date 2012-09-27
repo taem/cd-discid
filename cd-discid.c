@@ -140,14 +140,14 @@ int main(int argc, char *argv[])
 	else if (argc > 2) {
 		fprintf(stderr, "Usage: %s [--musicbrainz] [devicename]\n",
 			command);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	drive = open(devicename, O_RDONLY | O_NONBLOCK);
 	if (drive < 0) {
 		fprintf(stderr, "%s: %s: ", command, devicename);
 		perror("open");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 #if defined(__APPLE__)
@@ -158,13 +158,13 @@ int main(int argc, char *argv[])
 	    || discInfoParams.bufferLength != sizeof(hdr)) {
 		fprintf(stderr, "%s: %s: ", command, devicename);
 		perror("DKIOCCDREADDISCINFO");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 #else
 	if (ioctl(drive, CDROMREADTOCHDR, &hdr) < 0) {
 		fprintf(stderr, "%s: %s: ", command, devicename);
 		perror("CDROMREADTOCHDR");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 #endif
 
@@ -178,7 +178,7 @@ int main(int argc, char *argv[])
 		fprintf(stderr,
 			"%s: %s: Can't allocate memory for TOC entries\n",
 			command, devicename);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 #if defined(__OpenBSD__)
