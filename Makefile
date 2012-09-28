@@ -20,14 +20,12 @@ MANDIR = ${PREFIX}/share/man/man1
 .SUFFIXES: .c .o
 
 .c.o:
-	@printf "  CC      $@\n"
-	@$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
+	$(CC) $(CFLAGS) $(CPPFLAGS) -c $<
 
 all: cd-discid
 
 cd-discid: $(OBJS)
-	@printf "  LINK    $@\n"
-	@$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@ $(OBJS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@ $(OBJS)
 
 install: cd-discid
 	$(INSTALL) -D cd-discid $(DESTDIR)$(BINDIR)/cd-discid
