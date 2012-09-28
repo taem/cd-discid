@@ -1,12 +1,11 @@
-.TH CD\-DISCID 1 2011-11-17
+.TH CD\-DISCID 1 2012-09-28
 .\" NAME should be all caps, SECTION should be 1-8, maybe w/ subsection
 .\" other parms are allowed: see man(7), man(1)
 .SH NAME
 cd\-discid \- read CD and get CDDB discid information
 .SH SYNOPSIS
 .B cd\-discid
-.RB [ --musicbrainz ]
-.RI [ devicename ]
+.RI [ option ...]
 .SH DESCRIPTION
 In order to do CDDB queries over the Internet, you must know the DiscID of
 the CD you are querying.
@@ -22,6 +21,12 @@ but will work independently of it.
 .TP
 .B --musicbrainz
 Output a TOC that is suitable for calculating the MusicBrainz disc id.
+.TP
+.B --help
+Display a brief help message.
+.TP
+.B --version
+Show the version.
 .TP
 .B devicename
 CD\-ROM block device name that contains the CD to be queried. If this option
