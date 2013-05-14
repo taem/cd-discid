@@ -1,3 +1,13 @@
+cd-discid (1.4-1) unstable; urgency=low
+
+  * New upstream release.
+  * Bump standards version to 3.9.4:
+    - add debian branch to Vcs-Git field.
+  * debian/source/options:
+    - use xz compression.
+
+ -- Timur Birsh <taem@linukz.org>  Tue, 14 May 2013 15:04:32 +0600
+
 cd-discid (1.3.1-1) unstable; urgency=low
 
   * New upstream release:
