@@ -1,3 +1,12 @@
+cd-discid 1.4
+
+  * Make it possible to prevent stripping e.g. with STRIP=/bin/true.
+  * Add support for "make install DESTDIR=...".
+  * Add '--help' and '--version' options.
+  * Misc fixes.
+
+ -- Timur Birsh <taem@linukz.org>  2013-05-14
+
 cd-discid 1.3.1
 
   * Cleanup Makefile.
