@@ -130,7 +130,7 @@ int main(int argc, char *argv[])
 	int drive, i, totaltime;
 	long int cksum = 0;
 	int musicbrainz = 0;
-	unsigned char first = 1, last = 1;
+	unsigned char last = 1;
 	char *devicename = DEVICE_NAME;
 	struct cdrom_tochdr hdr;
 	struct cdrom_tocentry *TocEntry;
@@ -187,7 +187,6 @@ int main(int argc, char *argv[])
 	}
 #endif
 
-	first = hdr.cdth_trk0;
 	last = hdr.cdth_trk1;
 
 	len = (last + 1) * sizeof(struct cdrom_tocentry);
