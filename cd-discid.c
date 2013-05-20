@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 1999-2003 Robert Woodcock <rcw@debian.org>
- * Copyright (c) 2009-2012 Timur Birsh <taem@linukz.org>
+ * Copyright (c) 2009-2013 Timur Birsh <taem@linukz.org>
  * This code is hereby licensed for public consumption under either the
  * GNU GPL v2 or greater, or Larry Wall's Artistic license - your choice.
 
@@ -14,6 +14,8 @@
  * OpenBSD: Marcus Daniel <danielm@uni-muenster.de>
  * NetBSD: Chris Gilbert <chris@NetBSD.org>
  * MacOSX: Evan Jones <ejones@uwaterloo.ca> http://www.eng.uwaterloo.ca/~ejones/
+ *         Thomas Klausner <tk@giga.or.at>
+ * DragonFly: Thomas Klausner <tk@giga.or.at>, http://pkgsrc.se/audio/cd-discid
  */
 
 #include <stdio.h>
