@@ -46,7 +46,7 @@
 
 /* __FreeBSD_kernel__ is needed for properly compiling on Debian GNU/kFreeBSD
    Look at http://glibc-bsd.alioth.debian.org/porting/PORTING for more info */
-#elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__)
+#elif defined(__FreeBSD__) || defined(__FreeBSD_kernel__) || defined(__DragonFly__)
 #include <sys/cdio.h>
 #define CDROM_LBA               CD_LBA_FORMAT    /* first frame is 0 */
 #define CD_MSF_OFFSET           150              /* MSF offset of first frame */
@@ -93,7 +93,7 @@
 #define cdth_trk1               lastTrackNumberInLastSessionLSB
 #define cdrom_tocentry          CDTrackInfo
 #define cdte_track_address      trackStartAddress
-#define DEVICE_NAME             "/dev/disk1"
+#define DEVICE_NAME             "/dev/rdisk1"
 
 #else
 #error "Your OS isn't supported yet."
@@ -235,8 +235,7 @@ int main(int argc, char *argv[])
 	 * TocEntry[last-1].lastRecordedAddress + 1, so we compute the start
 	 * of leadout from the start+length of the last track instead
 	 */
-	TocEntry[last].cdte_track_address = TocEntry[last - 1].trackSize +
-		TocEntry[last - 1].trackStartAddress;
+	TocEntry[last].cdte_track_address = htonl(ntohl(TocEntry[last-1].trackSize) + ntohl(TocEntry[last-1].trackStartAddress));
 #else   /* FreeBSD, Linux, Solaris */
 	for (i = 0; i < last; i++) {
 		/* tracks start with 1, but I must start with 0 on OpenBSD */
@@ -259,12 +258,12 @@ int main(int argc, char *argv[])
 	/* release file handle */
 	close(drive);
 
-#if defined(__FreeBSD__)
+#if defined(__FreeBSD__) || defined(__DragonFly__) || defined(__APPLE__)
 	TocEntry[i].cdte_track_address = ntohl(TocEntry[i].cdte_track_address);
 #endif
 
 	for (i = 0; i < last; i++) {
-#if defined(__FreeBSD__)
+#if defined(__FreeBSD__) || defined(__DragonFly__) || defined(__APPLE__)
 		TocEntry[i].cdte_track_address = ntohl(TocEntry[i].cdte_track_address);
 #endif
 		cksum += cddb_sum((TocEntry[i].cdte_track_address + CD_MSF_OFFSET) / CD_FRAMES);
