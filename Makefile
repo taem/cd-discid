@@ -9,6 +9,8 @@ CFLAGS ?= -g -O2
 CFLAGS := -DVERSION=\"$(VERSION)\" $(CFLAGS)
 CPPFLAGS ?=
 LDFLAGS ?=
+# for IRIX use LIBS=-lcdaudio -lds -lmediad
+LIBS ?=
 
 SRCS = cd-discid.c
 OBJS = $(SRCS:.c=.o)
@@ -25,7 +27,7 @@ MANDIR = ${PREFIX}/share/man/man1
 all: cd-discid
 
 cd-discid: $(OBJS)
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@ $(OBJS)
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -o $@ $(OBJS) $(LIBS)
 
 install: cd-discid
 	mkdir -p $(BINDIR)

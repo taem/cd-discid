@@ -16,6 +16,7 @@
  * MacOSX: Evan Jones <ejones@uwaterloo.ca> http://www.eng.uwaterloo.ca/~ejones/
  *         Thomas Klausner <tk@giga.or.at>
  * DragonFly: Thomas Klausner <tk@giga.or.at>, http://pkgsrc.se/audio/cd-discid
+ * IRIX: https://github.com/canavan, https://github.com/taem/cd-discid/issues/4
  */
 
 #include <stdio.h>
@@ -97,6 +98,19 @@
 #define cdte_track_address      trackStartAddress
 #define DEVICE_NAME             "/dev/rdisk1"
 
+#elif defined(__sgi)
+#include <dmedia/cdaudio.h>
+#define CD_FRAMES               75               /* per second */
+#define CD_MSF_OFFSET           150              /* MSF offset of first frame */
+#define cdrom_tochdr            CDSTATUS
+#define cdth_trk0               first
+#define cdth_trk1               last
+#define close                   CDclose
+struct cdrom_tocentry
+{
+	int cdte_track_address;
+};
+#define DEVICE_NAME             "/dev/scsi/sc0d4l0"
 #else
 #error "Your OS isn't supported yet."
 #endif  /* os selection */
@@ -129,13 +143,20 @@ void usage()
 int main(int argc, char *argv[])
 {
 	int len;
-	int drive, i, totaltime;
+	int i, totaltime;
 	long int cksum = 0;
 	int musicbrainz = 0;
 	unsigned char last = 1;
 	char *devicename = DEVICE_NAME;
-	struct cdrom_tochdr hdr;
 	struct cdrom_tocentry *TocEntry;
+#ifndef __sgi
+	int drive;
+	struct cdrom_tochdr hdr;
+#else
+	CDPLAYER *drive;
+	CDTRACKINFO info;
+	cdrom_tochdr hdr;
+#endif
 	char *command = argv[0];
 
 #if defined(__OpenBSD__) || defined(__NetBSD__)
@@ -164,8 +185,13 @@ int main(int argc, char *argv[])
 		exit(EXIT_FAILURE);
 	}
 
+#if defined(__sgi)
+	drive = CDopen(devicename, "r");
+	if (drive == 0) {
+#else
 	drive = open(devicename, O_RDONLY | O_NONBLOCK);
 	if (drive < 0) {
+#endif
 		fprintf(stderr, "%s: %s: ", command, devicename);
 		perror("open");
 		exit(EXIT_FAILURE);
@@ -179,6 +205,11 @@ int main(int argc, char *argv[])
 	    || discInfoParams.bufferLength != sizeof(hdr)) {
 		fprintf(stderr, "%s: %s: ", command, devicename);
 		perror("DKIOCCDREADDISCINFO");
+		exit(EXIT_FAILURE);
+	}
+#elif defined(__sgi)
+	if (CDgetstatus(drive, &hdr) == 0) {
+		perror("CDROMREADTOCHDR");
 		exit(EXIT_FAILURE);
 	}
 #else
@@ -238,6 +269,14 @@ int main(int argc, char *argv[])
 	 * of leadout from the start+length of the last track instead
 	 */
 	TocEntry[last].cdte_track_address = htonl(ntohl(TocEntry[last-1].trackSize) + ntohl(TocEntry[last-1].trackStartAddress));
+#elif defined(__sgi)
+	for (i = 0; i < last; i++) {
+		if (CDgettrackinfo(drive, i + 1, &info) == 0) {
+			fprintf(stderr, "CDgettrackinfo failed on track %i: %s\n", i + 1, devicename);
+		}
+		TocEntry[i].cdte_track_address = info.start_min*60*CD_FRAMES + info.start_sec*CD_FRAMES + info.start_frame;
+	}
+	TocEntry[last].cdte_track_address = TocEntry[last - 1].cdte_track_address + info.total_min*60*CD_FRAMES + info.total_sec*CD_FRAMES + info.total_frame;
 #else   /* FreeBSD, Linux, Solaris */
 	for (i = 0; i < last; i++) {
 		/* tracks start with 1, but I must start with 0 on OpenBSD */
