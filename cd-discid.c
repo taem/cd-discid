@@ -133,7 +133,7 @@ void usage()
 	fprintf(stderr, "Usage: cd-discid [<option> ...]\n\n");
 	fprintf(stderr, "Options:\n");
 	fprintf(stderr, "  --musicbrainz   Output a TOC that is suitable "
-		"for calculating the MusicBrainz disc id.\n");
+		"for calculating the MusicBrainz Disc ID.\n");
 	fprintf(stderr, "  --help          Show this message.\n");
 	fprintf(stderr, "  --version       Show the version.\n");
 	fprintf(stderr, "  devicename      CD-ROM block device name that "
@@ -313,22 +313,24 @@ int main(int argc, char *argv[])
 	totaltime = ((TocEntry[last].cdte_track_address + CD_MSF_OFFSET) / CD_FRAMES) -
 		((TocEntry[0].cdte_track_address + CD_MSF_OFFSET) / CD_FRAMES);
 
-	/* print discid */
-	if (!musicbrainz)
-		printf("%08lx ", (cksum % 0xff) << 24 | totaltime << 8 | last);
-
-	/* print number of tracks */
-	printf("%d", last);
+	if (musicbrainz) {
+		/* print first track number (1), last track number, and lead-out track offset */
+		printf("1 %d %d", last, TocEntry[last].cdte_track_address + CD_MSF_OFFSET);
+	} else {
+		/* print discid, and last track number */
+		printf("%08lx %d", (cksum % 0xff) << 24 | totaltime << 8 | last, last);
+	}
 
 	/* print frame offsets of all tracks */
 	for (i = 0; i < last; i++)
 		printf(" %d", TocEntry[i].cdte_track_address + CD_MSF_OFFSET);
 
-	if (musicbrainz)
-		printf(" %d\n", TocEntry[last].cdte_track_address + CD_MSF_OFFSET);
-	else
-		/* print length of disc in seconds */
-		printf(" %d\n", (TocEntry[last].cdte_track_address + CD_MSF_OFFSET) / CD_FRAMES);
+	/* print length of disc in seconds */
+	if (!musicbrainz)
+		printf(" %d", (TocEntry[last].cdte_track_address + CD_MSF_OFFSET) / CD_FRAMES);
+
+	/* print final new-line */
+	printf("\n");
 
 	free(TocEntry);
 
